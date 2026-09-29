@@ -35,3 +35,17 @@ Cubre unicamente resumenes de ensayos clinicos aleatorizados (RCT) estructurados
 - Sesgo de idioma: cubre exclusivamente literatura en ingles, no representativo de investigacion publicada en espanol u otros idiomas.
 - Sesgo de dominio: limitado a RCTs estructurados; un modelo entrenado aqui no generalizaria bien a notas clinicas de pacientes reales, historias clinicas, o texto conversacional medico (dominios lingueisticamente distintos).
 - Uso prohibido: no debe usarse para inferir o validar afirmaciones clinicas sobre pacientes reales; es un dataset de clasificacion de ESTRUCTURA de texto, no de contenido medico verificado.
+
+## Cierre interpretativo
+
+**Resultado principal:** Se selecciono y valido el dataset PubMed 20k RCT (180,040 oraciones etiquetadas en 5 clases retoricas) como corpus aprobado para la Unidad 02, descartando el candidato Drug Reviews (UCI) por sus restricciones de licencia mas severas (prohibicion explicita de uso comercial y redistribucion).
+
+**Evidencia de calidad y procedencia:** Descarga reproducible mediante script propio (scripts/prepare_pubmed_rct.py) con hash SHA-256 registrado. Auditoria automatizada confirmo 0 valores nulos, 1,158 duplicados (0.64%, documentados y conservados), y distribucion de clases desbalanceada (methods 33%, objective 7.7% como minoritaria).
+
+**Riesgo o sesgo identificado:** Ausencia de licencia explicita sobre el texto de los resumenes (riesgo legal declarado por los propios autores del dataset); cobertura limitada a literatura en ingles sobre ensayos clinicos aleatorizados estructurados, sin representar notas clinicas reales de pacientes ni otros idiomas.
+
+**Decision de aprobacion o rechazo:** Aprobado con riesgo de licencia declarado, dado el uso academico ampliamente aceptado en la comunidad cientifica (cientos de citas y trabajos derivados publicados).
+
+**Limitacion que debe comunicarse:** Un modelo entrenado en este corpus clasifica ESTRUCTURA retorica de resumenes cientificos, no el contenido medico en si; no debe interpretarse como validacion de afirmaciones clinicas ni aplicarse directamente a notas clinicas de pacientes reales sin reentrenamiento.
+
+**Siguiente verificacion:** Confirmar en LAB05 que la division train/test controle el riesgo de fuga por los 1,158 textos duplicados identificados en la auditoria.
