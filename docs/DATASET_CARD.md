@@ -38,7 +38,7 @@ Cubre únicamente resúmenes de ensayos clínicos aleatorizados (RCT) estructura
 
 ## Cierre interpretativo
 
-**Resultado principal:** Se seleccionó y válido el dataset PubMed 20k RCT (180,040 oraciones etiquetadas en 5 clases retóricas) como corpus aprobado para la Unidad 02, descartando el candidato Drug Reviews (UCI) por sus restricciones de licencia más severas (prohibición explicita de uso comercial y redistribución).
+**Resultado principal:** Se seleccionó y validó el dataset PubMed 20k RCT (180,040 oraciones etiquetadas en 5 clases retóricas) como corpus aprobado para la Unidad 02, descartando el candidato Drug Reviews (UCI) por sus restricciones de licencia más severas (prohibición explicita de uso comercial y redistribución).
 
 **Evidencia de calidad y procedencia:** Descarga reproducible mediante script propio (scripts/prepare_pubmed_rct.py) con hash SHA-256 registrado. Auditoria automatizada confirmo 0 valores nulos, 1,158 duplicados (0.64%, documentados y conservados), y distribución de clases desbalanceada (methods 33%, objective 7.7% como minoritaria).
 
