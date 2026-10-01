@@ -1,10 +1,8 @@
-\# U02.DEMO01 · Demostracion de analisis de sentimientos
+﻿\# U02.DEMO01 · Demostración de análisis de sentimientos
 
 
 
-Extension practica vinculada a LAB05. No genera calificacion adicional; documenta el 
-
-tema de analisis de sentimientos del programa con evidencia reproducible.
+Extensión práctica vinculada a LAB05. No genera calificación adicional; documenta el tema de análisis de sentimientos del programa con evidencia reproducible.
 
 
 
@@ -34,7 +32,7 @@ TfidfVectorizer (lowercase, ngram\_range=(1,2), min\_df=3, max\_features=25000) 
 
 LogisticRegression (max\_iter=1000, class\_weight="balanced", random\_state=42), 
 
-ajustado unicamente sobre el conjunto de entrenamiento para evitar fuga.
+ajustado únicamente sobre el conjunto de entrenamiento para evitar fuga.
 
 
 
@@ -42,7 +40,7 @@ ajustado unicamente sobre el conjunto de entrenamiento para evitar fuga.
 
 
 
-\- F1-macro (validacion): 0.641
+\- F1-macro (validación): 0.641
 
 \- F1-macro (prueba): 0.589
 
@@ -50,7 +48,7 @@ ajustado unicamente sobre el conjunto de entrenamiento para evitar fuga.
 
 
 
-| Clase | Precision | Recall | F1-score | Support |
+| Clase | Precisión | Recall | F1-score | Support |
 
 |---|---|---|---|---|
 
@@ -62,63 +60,63 @@ ajustado unicamente sobre el conjunto de entrenamiento para evitar fuga.
 
 
 
-Verificaciones minimas: superadas (predicciones completas, clases validas, pipeline 
+Verificaciones mínimas: superadas (predicciones completas, clases válidas, pipeline 
 
 con los pasos esperados).
 
 
 
-\## Discusion
+\## Discusión
 
 
 
-\*\*1. Errores relacionados con negacion, ironia o falta de contexto:\*\*
+\*\*1. Errores relacionados con negación, ironía o falta de contexto:\*\*
 
-Al revisar 20 errores, el patron dominante no fue negacion clasica sino confusion entre 
+Al revisar 20 errores, el patrón dominante no fue negación clásica sino confusión entre 
 
-"tema polemico/negativo" y "tono neutral/informativo". Ejemplos: noticias sobre acusaciones 
+"tema polémico/negativo" y "tono neutral/informativo". Ejemplos: noticias sobre acusaciones 
 
-politicas (Maduro, RCMP canadiense) o temas sensibles (marihuana medicinal, crisis de 
+Políticas (Maduro, RCMP canadiense) o temas sensibles (marihuana medicinal, crisis de 
 
 opioides) clasificadas como neutral cuando el anotador humano las considero negative, 
 
 o viceversa. El modelo, basado en bolsa de palabras TF-IDF, confunde reportar un hecho 
 
-negativo con expresar una opinion negativa.
+negativo con expresar una opinión negativa.
 
 
 
 \*\*2. Clase con menor recall:\*\*
 
-"neutral" (0.536), confirmado tanto en el reporte de clasificacion como en la muestra 
+"neutral" (0.536), confirmado tanto en el reporte de clasificación como en la muestra 
 
-de 20 errores, donde 11 de los 20 casos correspondian a tweets neutrales mal clasificados 
+de 20 errores, donde 11 de los 20 casos correspondían a tweets neutrales mal clasificados 
 
 hacia negative o positive.
 
 
 
-\*\*3. Decision si los falsos negativos tuvieran mayor costo:\*\*
+\*\*3. Decisión si los falsos negativos tuvieran mayor costo:\*\*
 
-La clase "negative" ya tiene el recall mas alto (0.676) gracias a class\_weight="balanced", 
+La clase "negative" ya tiene el recall más alto (0.676) gracias a class\_weight="balanced", 
 
-a costa de su precision mas baja (0.556). Si el contexto exigiera priorizar aun mas la 
+a costa de su precisión más baja (0.556). Si el contexto exigiera priorizar aún más la 
 
-deteccion de negativos (ej. un sistema de alerta de quejas urgentes), se recomendaria 
+Detección de negativos (ej. un sistema de alerta de quejas urgentes), se recomendaría 
 
-ajustar pesos de clase manualmente mas alla de "balanced" o usar un umbral de decision 
+ajustar pesos de clase manualmente más allá de "balanced" o usar un umbral de decisión 
 
 basado en predict\_proba en vez de predict directo.
 
 
 
-\*\*4. Limitaciones para mensajes dominicanos en espanol:\*\*
+\*\*4. Limitaciones para mensajes dominicanos en español:\*\*
 
-El modelo esta entrenado exclusivamente en ingles; el vocabulario aprendido no reconoceria 
+El modelo está entrenado exclusivamente en inglés; el vocabulario aprendido no reconocería 
 
-modismos dominicanos ("chin", "vaina", "tato"), variaciones morfologicas del espanol, ni 
+modismos dominicanos ("chin", "vaina", "tato"), variaciones morfológicas del español, ni 
 
-el contexto pragmatico/cultural especifico de Republica Dominicana. Ademas, el desempeno 
+el contexto pragmático/cultural especifico de República Dominicana. Además, el desempeño 
 
 ya limitado en su propio idioma y dominio (F1-macro 0.589) sugiere que el reto de detectar 
 
@@ -128,19 +126,17 @@ modelo (bolsa de palabras sin contexto secuencial).
 
 
 
-\## Conexion con LAB05
+\## Conexión con LAB05
 
 
 
-Este pipeline usa la misma arquitectura (TfidfVectorizer + LogisticRegression) que el 
+Este pipeline usa la misma arquitectura (TfidfVectorizer + LogisticRegression) que el clasificador de rol retórico entrenado con PubMed 20k RCT, permitiendo comparar como 
 
-clasificador de rol retorico entrenado con PubMed 20k RCT, permitiendo comparar como 
-
-el mismo enfoque metodologico se comporta en dos dominios distintos: texto cientifico 
+el mismo enfoque metodológico se comporta en dos dominios distintos: texto científico 
 
 estructurado (LAB05, F1-macro 0.758) versus texto social informal y ambiguo (esta 
 
-demostracion, F1-macro 0.589), reforzando que el desempeno de un modelo de texto depende 
+Demostración, F1-macro 0.589), reforzando que el desempeño de un modelo de texto depende 
 
 fuertemente de la naturaleza del dominio, no solo del algoritmo elegido.
 

@@ -2,7 +2,7 @@
 
 
 
-Demostracion sin puntuacion independiente. Flujo completo de reconocimiento optico de 
+Demostración sin puntuación independiente. Flujo completo de reconocimiento óptico de 
 
 caracteres (OCR): de la imagen al texto procesable.
 
@@ -12,45 +12,45 @@ caracteres (OCR): de la imagen al texto procesable.
 
 
 
-Adquisicion -> Preprocesamiento -> Deteccion -> Reconocimiento -> Posprocesamiento -> 
+Adquisición -> Preprocesamiento -> Detección -> Reconocimiento -> Posprocesamiento -> 
 
-Validacion. Cada etapa introduce riesgos distintos (resolucion/inclinacion, perdida de 
+Validación. Cada etapa introduce riesgos distintos (resolución/inclinación, perdida de 
 
-trazos utiles, mezcla de bloques, confusion de simbolos, correcciones indebidas, 
+trazos utiles, mezcla de bloques, confusión de símbolos, correcciones indebidas, 
 
-aceptacion automatica de errores criticos).
-
-
-
-\## Ejecucion
+Aceptación automática de errores críticos).
 
 
 
-Se genero una imagen sintetica reproducible con tres lineas de texto ("Solicitud: 
-
-INF-8239", "Estado: Pendiente de revision", "Prioridad: Alta"), se preproceso con escala 
-
-de grises y umbralizacion Otsu (OpenCV), y se reconocio con Tesseract OCR.
+\## Ejecución
 
 
 
-\*\*Nota de reproducibilidad:\*\* el paquete de idioma espanol (tesseract-ocr-spa) no estuvo 
+Se generó una imagen sintética reproducible con tres líneas de texto ("Solicitud: 
 
-disponible en el entorno de ejecucion por restriccion de conectividad; se uso el paquete 
+INF-8239", "Estado: Pendiente de revisión", "Prioridad: Alta"), se preproceso con escala 
 
-de ingles (lang="eng") como sustituto. Esto es relevante para el analisis, no un error a 
+de grises y umbralizacion Otsu (OpenCV), y se reconoció con Tesseract OCR.
+
+
+
+\*\*Nota de reproducibilidad:\*\* el paquete de idioma español (tesseract-ocr-spa) no estuvo 
+
+disponible en el entorno de ejecución por restricción de conectividad; se usó el paquete 
+
+de inglés (lang="eng") como sustituto. Esto es relevante para el análisis, no un error a 
 
 ocultar.
 
 
 
-\## Texto extraido
+\## Texto extraído
 
 
 
 
 
-\## Inspeccion de confianza por palabra
+\## Inspección de confianza por palabra
 
 
 
@@ -76,53 +76,53 @@ ocultar.
 
 
 
-\## Interpretacion responsable
+\## Interpretación responsable
 
 
 
-\*\*Error identificado:\*\* la palabra "revision" se reconocio incorrectamente como 
+\*\*Error identificado:\*\* la palabra "revisión" se reconoció incorrectamente como 
 
-"revisi6n" (la "o" con tilde se confundio con el numero "6"). Esto ocurrio precisamente 
+"revisi6n" (la "o" con tilde se confundió con el número "6"). Esto ocurrió precisamente 
 
-por usar el paquete de idioma ingles sobre texto en espanol: el modelo de reconocimiento 
+por usar el paquete de idioma inglés sobre texto en español: el modelo de reconocimiento 
 
-no esta entrenado para las formas tipograficas de caracteres acentuados del espanol.
+no está entrenado para las formas tipográficas de caracteres acentuados del español.
 
 
 
-\*\*La confianza es una senal util, no una garantia:\*\* la palabra mal reconocida obtuvo una 
+\*\*La confianza es una señal útil, no una garantía:\*\* la palabra mal reconocida obtuvo una 
 
-confianza de 44.8%, dramaticamente mas baja que el resto de palabras (92-96%). Esto 
+confianza de 44.8%, dramáticamente más baja que el resto de palabras (92-96%). Esto 
 
 demuestra que el propio sistema "sabe" que ese resultado es menos confiable, aunque igual 
 
-entrega una prediccion. Un pipeline responsable deberia usar un umbral de confianza (por 
+entrega una predicción. Un pipeline responsable debería usar un umbral de confianza (por 
 
-ejemplo, marcar para revision humana cualquier palabra por debajo de 70%) en vez de 
+ejemplo, marcar para revisión humana cualquier palabra por debajo de 70%) en vez de 
 
-aceptar todo el texto extraido sin distincion.
+aceptar todo el texto extraído sin distinción.
 
 
 
 \*\*OCR extrae texto, no verifica veracidad:\*\* el sistema no tiene forma de saber si 
 
-"revisi6n" es un error tipografico o un codigo legitimo; solo un proceso de validacion 
+"revisi6n" es un error tipográfico o un código legítimo; solo un proceso de validación 
 
-posterior (humano o basado en reglas del dominio) puede hacer esa distincion.
+posterior (humano o basado en reglas del dominio) puede hacer esa distinción.
 
 
 
-\*\*Conexion con la practica:\*\* este mismo principio aplica directamente a la idea de un 
+\*\*Conexión con la práctica:\*\* este mismo principio aplica directamente a la idea de un 
 
-DSS de radiologia discutida anteriormente en este curso: si un informe medico escaneado 
+DSS de radiología discutida anteriormente en este curso: si un informe médico escaneado 
 
-se procesara con OCR antes de aplicar clasificacion de texto (como en el LAB05), un error 
+se procesará con OCR antes de aplicar clasificación de texto (como en el LAB05), un error 
 
-similar en una palabra clinica critica (dosis, fecha, resultado) podria propagarse 
+similar en una palabra clínica crítica (dosis, fecha, resultado) podría propagarse 
 
-silenciosamente hacia el modelo de clasificacion posterior, sin que nada en el pipeline 
+silenciosamente hacia el modelo de clasificación posterior, sin que nada en el pipeline 
 
-lo detecte automaticamente a menos que se implemente un umbral de confianza explicito.
+lo detecte automáticamente a menos que se implemente un umbral de confianza explicito.
 
 
 
@@ -130,17 +130,17 @@ lo detecte automaticamente a menos que se implemente un umbral de confianza expl
 
 
 
-Documentos reales (a diferencia de esta imagen sintetica) requieren ademas: autorizacion 
+Documentos reales (a diferencia de esta imagen sintética) requieren además: autorización 
 
-explicita para su procesamiento, proteccion de datos personales/sensibles, y reglas de 
+explicita para su procesamiento, protección de datos personales/sensibles, y reglas de 
 
-retencion definidas. La calidad del OCR debe evaluarse por campo especifico, tipo 
+Retención definidas. La calidad del OCR debe evaluarse por campo específico, tipo 
 
-documental e idioma, no con una sola metrica global.
+documental e idioma, no con una sola métrica global.
 
 
 
 \## Fuente
 
-Material de la Unidad 02, INF-8239 Ciencia de Datos II (Edwin Ramon Jose Nolasco).
+Material de la Unidad 02, INF-8239 Ciencia de Datos II (Edwin Ramón Jose Nolasco).
 
